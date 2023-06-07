@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Background from "../images/840843081452.jpg"
 import ContractABI from "../ABI.json"
 import { ethers } from "ethers";
+
 const Div = styled.div`
     background-image: url(${Background});
     height:100vh;
@@ -60,23 +61,15 @@ export default function MyForm() {
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs(values => ({ ...values, [name]: value }))
+    setInputs(values => ({...values, [name]: value}))
   }
-  // const [id, setId] = useState('')
-  // const [depositAmount, setDepositAmount] = useState('')
-  // const [currentAmount, setCurrentAmount] = useState('')
-  // const [depositTime, setDepositTime] = useState('')
-  // const [maturityPeriod, setmaturityPeriod] = useState('')
-  // const [canWithdrawAnyTime, setCanWithdrawAnyTime] = useState(Boolean)
 
-  let referenceID, depositAmount, currentAmount, depositTime, maturityPeriod, canWithdrawAnyTime, account 
-  // const [savings, setSavings] = useState([])
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   alert(inputs);
-  //   console.log(inputs)
-  // }
-  const contractAddress = "0x11d266bcB781472a4c2fc1884280dD8CaBb9f539";
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+//     alert(inputs);
+//   }
+
+const contractAddress = "0x11d266bcB781472a4c2fc1884280dD8CaBb9f539";
 
   const func = async (e) => {
     e.preventDefault()
@@ -95,7 +88,7 @@ export default function MyForm() {
 
       // console.log(savings)
       // console.log(await contract.interestRate());
-      await contract.deposit(inputs.amount, 0, inputs.period * 30 * 86400, false);
+      await contract.withdraw(inputs._id, inputs.amount)
       // console.log("IDs", JSON.parse(JSON.stringify(await contract.getIDs())));const
       // console.log(ethers.BigNumber.from(await contract.getIDs()))
       // for (let i = 0; i < Object.keys(await contract.getIDs()).length; i++) {
@@ -128,35 +121,31 @@ export default function MyForm() {
     else console.log("HEERE")
   }
 
-  // const hello = async (e) => {
-  // console.log(await contract.getIDs());
-  // }
   return (
     <Div>
-      <Heading>Fixed Deposit</Heading>
-      <FormDiv>
-        <form >
-          <Label>enter the Amount($):
-            <Input
-              type="number"
-              name="amount"
-              value={inputs.amount || ""}
-              onChange={handleChange}
-            />
-          </Label>
-          <Label>Maturity period (Months):
-            <Input
-              type="number"
-              name="period"
-              value={inputs.period || ""}
-              onChange={handleChange}
-            />
-          </Label>
-          <Submit type="submit" onClick={func} />
-          {/* <input type="submit" onClick={hello}/> */}
-        </form>
-      </FormDiv>
+        <Heading>Withdraw</Heading>
+        <FormDiv>
+        <form>
+      <Label>Enter ID of the deposit:
+      <Input 
+        type="text" 
+        name="_id" 
+        value={inputs._id || ""} 
+        onChange={handleChange}
+      />
+      </Label>
+      <Label>Amount to be Withdrawn:
+        <Input 
+          type="number" 
+          name="amount" 
+          value={inputs.amount || ""} 
+          onChange={handleChange}
+        />
+        </Label>
+        <Submit type="submit" onClick={func} />
+    </form>
+        </FormDiv>
     </Div>
-
+    
   )
 }

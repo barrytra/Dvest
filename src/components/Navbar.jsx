@@ -2,6 +2,7 @@ import "./styles.css";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom"
+import ConnectWallet from "../utils/ConnectWallet";
 
 const Nav = styled.nav`
     z-index: 4;
@@ -40,7 +41,6 @@ background-color: white;
 border: 2px solid #4CAF50;
 border-radius: 5px;
 transition-duration: 0.4s;
-padding: 15px 32px;
 text-align: center;
 display: inline-block;
 font-size: 16px;
@@ -52,6 +52,7 @@ cursor: pointer;
 `
 
 export default function Navbar() {
+  
   const lastScrollTop = useRef(0);
 
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
@@ -78,7 +79,7 @@ export default function Navbar() {
     <>
       <Nav className={`${isNavbarVisible ? "visible" : ""}`}>
         <Heading to="/" > Title</Heading>
-        <Wallet to="/" > Connect Wallet</Wallet>
+        <Wallet ><ConnectWallet/></Wallet>
       </Nav>
     </>
   );

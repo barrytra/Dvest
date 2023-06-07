@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Background from "../images/840843081452.jpg"
 import { Link } from "react-router-dom"
+import ConnectWallet from "../utils/ConnectWallet";
 
 const Div = styled.div`
     background-image: url(${Background});
@@ -41,7 +42,6 @@ background-color: white;
 border: 2px solid #4CAF50;
 border-radius: 5px;
 transition-duration: 0.4s;
-padding: 15px 32px;
 text-align: center;
 display: inline-block;
 font-size: 16px;
@@ -73,7 +73,7 @@ export default function Header() {
             <Description>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus dolorum accusamus alias culpa? Dolore iusto ipsam blanditiis autem magnam harum repudiandae expedita magni soluta omnis. Quam eos quae cumque velit?
             </Description>
-            <Wallet to="/" > Connect Wallet</Wallet>
+            <Wallet><ConnectWallet/></Wallet>
         </Div>
     )
 }

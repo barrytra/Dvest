@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from 'react';
 import styled from "styled-components";
 import Background from "../images/840843081452.jpg"
+import ContractABI from "../ABI.json"
+import { ethers } from "ethers";
 
 const Div = styled.div`
     background-image: url(${Background});
@@ -56,39 +58,101 @@ const Submit = styled.input`
 export default function MyForm() {
   const [inputs, setInputs] = useState({});
 
+  const [isAutomaticWithdraw, setIsAutomaticWithdraw] = useState(false);
+  const onChangeCheckBox = (e) => {
+    setIsAutomaticWithdraw(e.target.checked);
+  };
+
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}))
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(inputs);
+  const contractAddress = "0x11d266bcB781472a4c2fc1884280dD8CaBb9f539";
+
+  const func = async (e) => {
+    e.preventDefault()
+    // console.log(inputs)
+
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, ContractABI, signer);
+
+      // console.log(await typeof(contract.getIDs()));
+      // console.log(await contract.getIDs());
+      // let temp = await contract.getIDs();
+      // console.log("temp", temp[0]._hex);
+
+      // console.log(savings)
+      // console.log(await contract.interestRate());
+      if(isAutomaticWithdraw){
+        await contract.deposit(inputs.amount, inputs.withdrawAmount, 0, true);
+      }
+      else{
+        await contract.deposit(inputs.amount, 0, 0, true);
+      }
+      
+      // console.log("IDs", JSON.parse(JSON.stringify(await contract.getIDs())));const
+      // console.log(ethers.BigNumber.from(await contract.getIDs()))
+      // for (let i = 0; i < Object.keys(await contract.getIDs()).length; i++) {
+      //   let temp1 = await contract.getDeposit(i);
+      //   referenceID = temp[i]._hex
+      //   depositAmount = temp1[0]._hex
+      //   currentAmount = temp1[1]._hex
+      //   depositTime = temp1[2]._hex
+      //   maturityPeriod = temp1[3]._hex
+      //   canWithdrawAnyTime = temp1[4]
+        
+
+      //  const data = { referenceID, depositAmount, currentAmount, depositTime, maturityPeriod, canWithdrawAnyTime };
+      //   console.log(data.referenceID)
+
+      //   fetch('http://localhost:8000/clientData', {
+      //     method: 'POST',
+      //     headers: { "content-type": "aplication/json"},
+      //     body: JSON.stringify(data)
+      //   }).then(() => {
+      //     console.log("data added")
+      //   })
+      // }
+
+
+      // console.log("Savings", await contract.getDeposit(1));
+      //let staked = await ludoContract.startGame(currentAccount, gameStartData.coins);
+    }
+  
+    else console.log("HEERE")
   }
 
   return (
     <Div>
         <Heading>Dynamic Deposit</Heading>
         <FormDiv>
-        <form onSubmit={handleSubmit}>
-      <Label>enter the Amount($):
+        <form >
+      <Label>enter the Amount to be deposited($):
       <Input 
-        type="text" 
+        type="number" 
         name="amount" 
         value={inputs.amount || ""} 
         onChange={handleChange}
       />
       </Label>
-      <Label>Maturity period (Months):
-        <Input 
-          type="number" 
-          name="period" 
-          value={inputs.period || ""} 
-          onChange={handleChange}
-        />
-        </Label>
-        <Submit type="submit" />
+      <input type="checkbox" value={isAutomaticWithdraw} onChange={onChangeCheckBox} />
+      {(!isAutomaticWithdraw) && <Label for="vehicle1">automatic withdrawal</Label>}
+      {isAutomaticWithdraw && (
+          <Label> Amount for automatic withdrawal($):
+          <Input 
+            type="number" 
+            name="withdrawAmount" 
+            value={inputs.withdrawAmount || ""} 
+            onChange={handleChange}
+          />
+          </Label>
+        )}
+        <Submit type="submit" onClick={func} />
     </form>
         </FormDiv>
     </Div>

@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Dashboard from "./pages/Dashboard";
 import FDForm from "./pages/FDForm"
 import DDForm from "./pages/DDForm"
+import WithdrawForm from "./pages/WithdrawForm"
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="/FDForm" element={<FDForm/>} />
-        <Route path="/DDform" element={<DDForm/>} />
+        <Route path="/DDForm" element={<DDForm/>} />
+        <Route path="/WithdrawForm" element={<WithdrawForm/>}/>
         </Routes>
         
       </div>

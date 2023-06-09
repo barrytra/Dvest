@@ -1,6 +1,6 @@
 ## Try it out
 https://chainlink-spring-2023-theta.vercel.app/
-# note:view the upkeep that was used in demo here!!
+### note:view the upkeep that was used in demo here!!
 https://automation.chain.link/goerli/84705926911140543431374488039370261986402465726429740788881415032055113024074
 ## Inspiration
 Government/Private banks provide interest rates which is fixed and is not related to inflation rates of the country. Problem with this approach is that users while earning interest might still suffer loss if the inflation rates become higher than the interest rate that banks provides. For eg, if the interest rate provided by bank is 3% and the inflation rate is 6%, user suffer a loss. We solve this problem using inflation rate data provided by Truflation per day. We give interest to users on daily basis by fetching latest inflation rate automatically every 24hr. Users also have the ability to withdraw automatically on reaching certain profit.

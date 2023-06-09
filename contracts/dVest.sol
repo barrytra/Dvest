@@ -18,7 +18,8 @@ contract dVest  {
 
     address public owner;
 
-    //Truflation address - 0x25Cb70c92A1FA078E4A9b918c6Ea51376889a15a
+    //TruflationContract address - 0x25Cb70c92A1FA078E4A9b918c6Ea51376889a15a
+    //verseTokenContract address - 0xA3A8F2B4DcCB6c9a9Ff60A205aD8A142B31a5c88
     constructor(address _truflationTesterAddress, address _verseTokenContract, uint256 _timer) { 
         truflationTester = TruflationTester(_truflationTesterAddress);
         verseTokensContract = Token(_verseTokenContract);

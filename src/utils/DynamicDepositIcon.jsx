@@ -8,6 +8,8 @@ text-decoration-line: none;
 color: #11004d;
 font-family: "McLaren", cursive;
 background-color: white;
+grid-column-start: 1;
+  grid-column-end: 3;
 border: 2px solid #11004d;
 border-radius: 5px;
 transition-duration: 0.4s;

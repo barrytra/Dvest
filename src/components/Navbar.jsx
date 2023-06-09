@@ -20,22 +20,22 @@ const Nav = styled.nav`
     width: 100%;
     height: 72px;
     box-shadow: 0 10px 20px rgb(0 0 0 / 10%);
-    background: #6b63ff;
+    background: #11004d;
     transition: 0.3s;
 `
 
 const Heading = styled(Link)`
-    color: green;
+    color: aqua;
     font-family: "McLaren", cursive;
     font-weight: 800;
     font-size: 39px;
     text-decoration-line: none;
-    margin: auto 0px;
+    margin: auto 2rem;
 `
-const Wallet = styled(Link)`
+const Wallet = styled.div`
 font-weight: bold;
 text-decoration-line: none;
-color: green;
+color: black;
 font-family: "McLaren", cursive;
 background-color: white;
 border: 2px solid #4CAF50;
@@ -45,10 +45,7 @@ text-align: center;
 display: inline-block;
 font-size: 16px;
 cursor: pointer;
-:hover{
-    color: white;
-    background-color: green;
-}
+
 `
 
 export default function Navbar() {
@@ -78,7 +75,7 @@ export default function Navbar() {
   return (
     <>
       <Nav className={`${isNavbarVisible ? "visible" : ""}`}>
-        <Heading to="/" > Title</Heading>
+        <Heading to="/" > dVest</Heading>
         <Wallet ><ConnectWallet/></Wallet>
       </Nav>
     </>

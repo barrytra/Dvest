@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom"
-
+import ContractABI2 from "../ABI2.json"
+import { ethers } from "ethers";
 
 const Wallet = styled(Link)`
 font-weight: bold;
 text-decoration-line: none;
-color: green;
+color: #11004d;
 font-family: "McLaren", cursive;
 background-color: white;
 padding: 15px 32px;
@@ -16,12 +17,12 @@ font-size: 16px;
 cursor: pointer;
 :hover{
     color: white;
-    background-color: green;
+    background-color: #11004d;
 }
 `
 
 export default function ConnectWallet(){
-    const [currentAccount, setCurrentAccount] = useState("");
+  const [currentAccount, setCurrentAccount] = useState("");
 
     const connectWallet = async () => {
       try {
@@ -36,9 +37,21 @@ export default function ConnectWallet(){
         });
         console.log("Connected", accounts[0]);
         setCurrentAccount(accounts[0]);
+
     
       } catch (error) {
         console.log(error);
+      }
+
+      const mintContract = "0xA3A8F2B4DcCB6c9a9Ff60A205aD8A142B31a5c88"
+
+      const { ethereum } = window;
+      if (ethereum) {
+          const provider = new ethers.providers.Web3Provider(ethereum);
+          const signer = provider.getSigner();
+          const contract = new ethers.Contract(mintContract, ContractABI2, signer);
+
+          await contract.newUser(currentAccount);
       }
     };
   
@@ -64,11 +77,22 @@ export default function ConnectWallet(){
       } else {
         console.log("No authorized account found");
       }
+
+    //   const mintAddress = "0x5e74e338F76fa60fD91081010564080B8932DEe7"
+
+    //   if (ethereum) {
+    //       const provider = new ethers.providers.Web3Provider(ethereum);
+    //       const signer = provider.getSigner();
+    //       const contract = new ethers.Contract(mintAddress, ContractABI2, signer);
+
+    //       await contract.newUser(currentAccount);
+    //   }
     };
   
     useEffect(() => {
       checkIfWalletIsConnected();
     }, []);
+
 
     return(
         <div>

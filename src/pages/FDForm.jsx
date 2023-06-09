@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Background from "../images/840843081452.jpg"
 import ContractABI from "../ABI.json"
 import { ethers } from "ethers";
+import { Link } from "react-router-dom"
+
 const Div = styled.div`
     background-image: url(${Background});
     height:100vh;
@@ -54,6 +56,18 @@ const Submit = styled.input`
     background-color: #c7f4ff;
 }
 `
+const DashBoard = styled(Link)`
+    margin: 3vh 10% auto 90% ;
+    font-size: large;
+    color: aqua;
+    font-weight: bold;
+    text-decoration-line: none;
+    font-family: "Euclid Circular A", "Poppins";
+    font-weight: 600;
+    position: absolute;
+    justify-self: end;
+    cursor: pointer;
+`
 export default function MyForm() {
   const [inputs, setInputs] = useState({});
 
@@ -62,25 +76,11 @@ export default function MyForm() {
     const value = event.target.value;
     setInputs(values => ({ ...values, [name]: value }))
   }
-  // const [id, setId] = useState('')
-  // const [depositAmount, setDepositAmount] = useState('')
-  // const [currentAmount, setCurrentAmount] = useState('')
-  // const [depositTime, setDepositTime] = useState('')
-  // const [maturityPeriod, setmaturityPeriod] = useState('')
-  // const [canWithdrawAnyTime, setCanWithdrawAnyTime] = useState(Boolean)
 
-  let referenceID, depositAmount, currentAmount, depositTime, maturityPeriod, canWithdrawAnyTime, account 
-  // const [savings, setSavings] = useState([])
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   alert(inputs);
-  //   console.log(inputs)
-  // }
-  const contractAddress = "0x11d266bcB781472a4c2fc1884280dD8CaBb9f539";
+  const contractAddress = "0x037d942fC7074Fb3d46CDDCF13BA035d0246b7BD";
 
   const func = async (e) => {
     e.preventDefault()
-    // console.log(inputs)
 
     const { ethereum } = window;
     if (ethereum) {
@@ -88,55 +88,21 @@ export default function MyForm() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(contractAddress, ContractABI, signer);
 
-      // console.log(await typeof(contract.getIDs()));
-      // console.log(await contract.getIDs());
-      // let temp = await contract.getIDs();
-      // console.log("temp", temp[0]._hex);
-
-      // console.log(savings)
-      // console.log(await contract.interestRate());
-      await contract.deposit(inputs.amount, 0, inputs.period * 30 * 86400, false);
-      // console.log("IDs", JSON.parse(JSON.stringify(await contract.getIDs())));const
-      // console.log(ethers.BigNumber.from(await contract.getIDs()))
-      // for (let i = 0; i < Object.keys(await contract.getIDs()).length; i++) {
-      //   let temp1 = await contract.getDeposit(i);
-      //   referenceID = temp[i]._hex
-      //   depositAmount = temp1[0]._hex
-      //   currentAmount = temp1[1]._hex
-      //   depositTime = temp1[2]._hex
-      //   maturityPeriod = temp1[3]._hex
-      //   canWithdrawAnyTime = temp1[4]
-        
-
-      //  const data = { referenceID, depositAmount, currentAmount, depositTime, maturityPeriod, canWithdrawAnyTime };
-      //   console.log(data.referenceID)
-
-      //   fetch('http://localhost:8000/clientData', {
-      //     method: 'POST',
-      //     headers: { "content-type": "aplication/json"},
-      //     body: JSON.stringify(data)
-      //   }).then(() => {
-      //     console.log("data added")
-      //   })
-      // }
-
-
-      // console.log("Savings", await contract.getDeposit(1));
-      //let staked = await ludoContract.startGame(currentAccount, gameStartData.coins);
+      await contract.deposit(inputs.amount, 0, inputs.period , false);
     }
   
     else console.log("HEERE")
   }
 
-  // const hello = async (e) => {
-  // console.log(await contract.getIDs());
-  // }
+
   return (
     <Div>
+      <DashBoard to="/Dashboard"> Dashboard </DashBoard>
       <Heading>Fixed Deposit</Heading>
+
       <FormDiv>
         <form >
-          <Label>enter the Amount($):
+          <Label>enter the Amount(VTEST):
             <Input
               type="number"
               name="amount"
@@ -144,7 +110,7 @@ export default function MyForm() {
               onChange={handleChange}
             />
           </Label>
-          <Label>Maturity period (Months):
+          <Label>Maturity period (seconds):
             <Input
               type="number"
               name="period"
@@ -153,7 +119,6 @@ export default function MyForm() {
             />
           </Label>
           <Submit type="submit" onClick={func} />
-          {/* <input type="submit" onClick={hello}/> */}
         </form>
       </FormDiv>
     </Div>

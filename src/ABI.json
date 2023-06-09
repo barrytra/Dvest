@@ -31,7 +31,7 @@
 		],
 		"name": "deposit",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -61,12 +61,30 @@
 			},
 			{
 				"internalType": "address",
-				"name": "_trufTokenContract",
+				"name": "_verseTokenContract",
 				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_timer",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_timer",
+				"type": "uint256"
+			}
+		],
+		"name": "updateTimer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -132,6 +150,37 @@
 				"internalType": "struct Debenture.Savings",
 				"name": "",
 				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getHistory",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "int256",
+						"name": "amount",
+						"type": "int256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Debenture.data[]",
+				"name": "",
+				"type": "tuple[]"
 			}
 		],
 		"stateMutability": "view",
@@ -227,19 +276,6 @@
 	},
 	{
 		"inputs": [],
-		"name": "tempCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "truflationTester",
 		"outputs": [
 			{
@@ -253,10 +289,10 @@
 	},
 	{
 		"inputs": [],
-		"name": "trufTokensContract",
+		"name": "verseTokensContract",
 		"outputs": [
 			{
-				"internalType": "contract Truf",
+				"internalType": "contract Token",
 				"name": "",
 				"type": "address"
 			}

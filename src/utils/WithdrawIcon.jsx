@@ -11,6 +11,8 @@ background-color: white;
 border: 2px solid #11004d;
 border-radius: 5px;
 transition-duration: 0.4s;
+grid-column-start: 1;
+  grid-column-end: 3;
 padding: 15px 32px;
 text-align: center;
 display: inline-block;

@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Background from "../images/840843081452.jpg"
 import ContractABI from "../ABI.json"
 import { ethers } from "ethers";
+import { Link } from "react-router-dom"
+
 
 const Div = styled.div`
     background-image: url(${Background});
@@ -11,6 +13,9 @@ const Div = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
 
+`
+const Div1 = styled.div`
+  margin-bottom: 5px;
 `
 const Heading = styled.div`
     font-size: 5rem;
@@ -33,6 +38,18 @@ const FormDiv = styled.div`
 const Label = styled.label`
     color: aliceblue;
     font-family: "McLaren", cursive;
+`
+const DashBoard = styled(Link)`
+    margin: 3vh 10% auto 90% ;
+    font-size: large;
+    color: aqua;
+    font-weight: bold;
+    text-decoration-line: none;
+    font-family: "Euclid Circular A", "Poppins";
+    font-weight: 600;
+    position: absolute;
+    justify-self: end;
+    cursor: pointer;
 `
 const Input = styled.input`
     width: 100%;
@@ -69,7 +86,7 @@ export default function MyForm() {
     setInputs(values => ({...values, [name]: value}))
   }
 
-  const contractAddress = "0x11d266bcB781472a4c2fc1884280dD8CaBb9f539";
+  const contractAddress = "0x037d942fC7074Fb3d46CDDCF13BA035d0246b7BD";
 
   const func = async (e) => {
     e.preventDefault()
@@ -81,13 +98,6 @@ export default function MyForm() {
       const signer = provider.getSigner();
       const contract = new ethers.Contract(contractAddress, ContractABI, signer);
 
-      // console.log(await typeof(contract.getIDs()));
-      // console.log(await contract.getIDs());
-      // let temp = await contract.getIDs();
-      // console.log("temp", temp[0]._hex);
-
-      // console.log(savings)
-      // console.log(await contract.interestRate());
       if(isAutomaticWithdraw){
         await contract.deposit(inputs.amount, inputs.withdrawAmount, 0, true);
       }
@@ -95,33 +105,6 @@ export default function MyForm() {
         await contract.deposit(inputs.amount, 0, 0, true);
       }
       
-      // console.log("IDs", JSON.parse(JSON.stringify(await contract.getIDs())));const
-      // console.log(ethers.BigNumber.from(await contract.getIDs()))
-      // for (let i = 0; i < Object.keys(await contract.getIDs()).length; i++) {
-      //   let temp1 = await contract.getDeposit(i);
-      //   referenceID = temp[i]._hex
-      //   depositAmount = temp1[0]._hex
-      //   currentAmount = temp1[1]._hex
-      //   depositTime = temp1[2]._hex
-      //   maturityPeriod = temp1[3]._hex
-      //   canWithdrawAnyTime = temp1[4]
-        
-
-      //  const data = { referenceID, depositAmount, currentAmount, depositTime, maturityPeriod, canWithdrawAnyTime };
-      //   console.log(data.referenceID)
-
-      //   fetch('http://localhost:8000/clientData', {
-      //     method: 'POST',
-      //     headers: { "content-type": "aplication/json"},
-      //     body: JSON.stringify(data)
-      //   }).then(() => {
-      //     console.log("data added")
-      //   })
-      // }
-
-
-      // console.log("Savings", await contract.getDeposit(1));
-      //let staked = await ludoContract.startGame(currentAccount, gameStartData.coins);
     }
   
     else console.log("HEERE")
@@ -129,10 +112,11 @@ export default function MyForm() {
 
   return (
     <Div>
+      <DashBoard to="/Dashboard"> Dashboard </DashBoard>
         <Heading>Dynamic Deposit</Heading>
         <FormDiv>
         <form >
-      <Label>enter the Amount to be deposited($):
+      <Label>enter the Amount to be deposited(VTEST):
       <Input 
         type="number" 
         name="amount" 
@@ -140,10 +124,11 @@ export default function MyForm() {
         onChange={handleChange}
       />
       </Label>
+      <Div1>
       <input type="checkbox" value={isAutomaticWithdraw} onChange={onChangeCheckBox} />
       {(!isAutomaticWithdraw) && <Label for="vehicle1">automatic withdrawal</Label>}
       {isAutomaticWithdraw && (
-          <Label> Amount for automatic withdrawal($):
+          <Label> Amount for automatic withdrawal(VTEST):
           <Input 
             type="number" 
             name="withdrawAmount" 
@@ -152,6 +137,8 @@ export default function MyForm() {
           />
           </Label>
         )}
+      </Div1>
+     
         <Submit type="submit" onClick={func} />
     </form>
         </FormDiv>

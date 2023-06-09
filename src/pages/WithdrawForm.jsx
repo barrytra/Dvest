@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Background from "../images/840843081452.jpg"
 import ContractABI from "../ABI.json"
 import { ethers } from "ethers";
+import { Link } from "react-router-dom"
+
 
 const Div = styled.div`
     background-image: url(${Background});
@@ -11,6 +13,18 @@ const Div = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
 
+`
+const DashBoard = styled(Link)`
+    margin: 3vh 10% auto 90% ;
+    font-size: large;
+    color: aqua;
+    font-weight: bold;
+    text-decoration-line: none;
+    font-family: "Euclid Circular A", "Poppins";
+    font-weight: 600;
+    position: absolute;
+    justify-self: end;
+    cursor: pointer;
 `
 const Heading = styled.div`
     font-size: 5rem;
@@ -61,19 +75,15 @@ export default function MyForm() {
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs(values => ({...values, [name]: value}))
+    setInputs(values => ({ ...values, [name]: value }))
   }
 
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     alert(inputs);
-//   }
 
-const contractAddress = "0x11d266bcB781472a4c2fc1884280dD8CaBb9f539";
+
+  const contractAddress = "0x037d942fC7074Fb3d46CDDCF13BA035d0246b7BD";
 
   const func = async (e) => {
     e.preventDefault()
-    // console.log(inputs)
 
     const { ethereum } = window;
     if (ethereum) {
@@ -81,71 +91,43 @@ const contractAddress = "0x11d266bcB781472a4c2fc1884280dD8CaBb9f539";
       const signer = provider.getSigner();
       const contract = new ethers.Contract(contractAddress, ContractABI, signer);
 
-      // console.log(await typeof(contract.getIDs()));
-      // console.log(await contract.getIDs());
-      // let temp = await contract.getIDs();
-      // console.log("temp", temp[0]._hex);
+      try {
+        await contract.withdraw(inputs._id, inputs.amount)
+      }
+      catch (err) {
+        alert("u cannot withdraw before maturity period")
+      }
 
-      // console.log(savings)
-      // console.log(await contract.interestRate());
-      await contract.withdraw(inputs._id, inputs.amount)
-      // console.log("IDs", JSON.parse(JSON.stringify(await contract.getIDs())));const
-      // console.log(ethers.BigNumber.from(await contract.getIDs()))
-      // for (let i = 0; i < Object.keys(await contract.getIDs()).length; i++) {
-      //   let temp1 = await contract.getDeposit(i);
-      //   referenceID = temp[i]._hex
-      //   depositAmount = temp1[0]._hex
-      //   currentAmount = temp1[1]._hex
-      //   depositTime = temp1[2]._hex
-      //   maturityPeriod = temp1[3]._hex
-      //   canWithdrawAnyTime = temp1[4]
-        
-
-      //  const data = { referenceID, depositAmount, currentAmount, depositTime, maturityPeriod, canWithdrawAnyTime };
-      //   console.log(data.referenceID)
-
-      //   fetch('http://localhost:8000/clientData', {
-      //     method: 'POST',
-      //     headers: { "content-type": "aplication/json"},
-      //     body: JSON.stringify(data)
-      //   }).then(() => {
-      //     console.log("data added")
-      //   })
-      // }
-
-
-      // console.log("Savings", await contract.getDeposit(1));
-      //let staked = await ludoContract.startGame(currentAccount, gameStartData.coins);
     }
-  
     else console.log("HEERE")
   }
 
   return (
     <Div>
-        <Heading>Withdraw</Heading>
-        <FormDiv>
+      <DashBoard to="/Dashboard"> Dashboard </DashBoard>
+      <Heading>Withdraw</Heading>
+      <FormDiv>
         <form>
-      <Label>Enter ID of the deposit:
-      <Input 
-        type="text" 
-        name="_id" 
-        value={inputs._id || ""} 
-        onChange={handleChange}
-      />
-      </Label>
-      <Label>Amount to be Withdrawn:
-        <Input 
-          type="number" 
-          name="amount" 
-          value={inputs.amount || ""} 
-          onChange={handleChange}
-        />
-        </Label>
-        <Submit type="submit" onClick={func} />
-    </form>
-        </FormDiv>
+          <Label>Enter ID of the deposit:
+            <Input
+              type="text"
+              name="_id"
+              value={inputs._id || ""}
+              onChange={handleChange}
+            />
+          </Label>
+          <Label>Amount to be Withdrawn(VTEST):
+            <Input
+              type="number"
+              name="amount"
+              value={inputs.amount || ""}
+              onChange={handleChange}
+            />
+          </Label>
+          <Submit type="submit" onClick={func} />
+        </form>
+      </FormDiv>
     </Div>
-    
+
   )
 }

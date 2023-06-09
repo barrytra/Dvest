@@ -3,7 +3,7 @@ pragma solidity ^ 0.8.7;
 
 import "./verse.sol";
 
-contract Token is VerseTest{ //goerli - 0x3ae4069E4a5Bf6F42d75a68aeF7Ccf21fe5bE016
+contract Token is VerseTest{ 
 
     address private owner;
     uint256 public bonus;

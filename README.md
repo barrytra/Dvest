@@ -9,6 +9,12 @@ Once user deposits his/her tokens can withdraw them anytime. Additonal feature f
 
 ## How we built it
 Fronted was built using Reactjs. Smart contracts were written in solidity. Truflation helps us to fetch inflation rate( using Chainlink oracle which is used to provide interest to users per day.
+## Contracts structure
+verse.sol - VERSE token contract on goerli testnet provided by VERSE team.
+mintVerse.sol - Contains some added functionalities on top of verse.sol
+Truflation.sol - Fetches inflation rate(int) from chainlink oracles.
+dVest.sol - Uses mintVerse.sol and Truflation.sol and contains the dapp logic.
+
 ## Challenges we ran into
 Understanding Truflation smart contract to fetch inflation rate and Chainlink Automation tool. But the Chainlink team has been very helpful to understand the things and debug the things. 
 ## Accomplishments that we're proud of

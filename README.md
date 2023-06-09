@@ -10,7 +10,7 @@ Once user deposits his/her tokens can withdraw them anytime. Additonal feature f
 ## How we built it
 Fronted was built using Reactjs. Smart contracts were written in solidity. Truflation helps us to fetch inflation rate( using Chainlink oracle which is used to provide interest to users per day.
 ## Challenges we ran into
-Understanding Truflation smart contract to fetch inflation rate and Chainlink Automation tool. But the Chainlink has been very helpful for us to understand the things and debug the things. 
+Understanding Truflation smart contract to fetch inflation rate and Chainlink Automation tool. But the Chainlink team has been very helpful to understand the things and debug the things. 
 ## Accomplishments that we're proud of
 We were able to make our dapp running with all the main features. Users can now be saved from daily inflation rate and can protect their money.
 ## What we learned

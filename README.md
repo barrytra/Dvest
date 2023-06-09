@@ -6,6 +6,7 @@ Decentralized investing platform where users can deposit their verse tokens(VTES
 user can deposit tokens and can withdraw them only after the maturity period. User can fill maturity period during the deposit
 2) Dynamic Deposit
 Once user deposits his/her tokens can withdraw them anytime. Additonal feature for dynamic deposit is that user can choose for autmatic withdrawal. Just fill out the token amount and as soon as the token amount reaches tha value, tokens will be automatically credited to the user's metamask wallet. For example: user deposits 50 VTEST and enters withdrawal amount as 60 VTEST. When the amount reaches 60 all of the tokens will be credited to user's wallet. This feature was implemented with the help of chainlink automation tool using time based trigger.<br>
+## Flow of the dapp
 ![WhatsApp Image 2023-06-10 at 4 09 48 AM (1)](https://github.com/barrytra/chainlink_spring_2023/assets/109822630/606e2ff4-18f9-44e0-a1c1-54cc50155e8f)
 
 ## How we built it

@@ -7,6 +7,8 @@ user can deposit tokens and can withdraw them only after the maturity period. Us
 2) Dynamic Deposit
 Once user deposits his/her tokens can withdraw them anytime. Additonal feature for dynamic deposit is that user can choose for autmatic withdrawal. Just fill out the token amount and as soon as the token amount reaches tha value, tokens will be automatically credited to the user's metamask wallet. For example: user deposits 50 VTEST and enters withdrawal amount as 60 VTEST. When the amount reaches 60 all of the tokens will be credited to user's wallet. This feature was implemented with the help of chainlink automation tool using time based trigger.
 
+![WhatsApp Image 2023-06-10 at 4 09 48 AM (1)](https://github.com/barrytra/chainlink_spring_2023/assets/109822630/606e2ff4-18f9-44e0-a1c1-54cc50155e8f)
+
 ## How we built it
 Fronted was built using Reactjs. Smart contracts were written in solidity. Truflation helps us to fetch inflation rate( using Chainlink oracle which is used to provide interest to users per day.
 ## Contracts structure
@@ -14,6 +16,7 @@ verse.sol - VERSE token contract on goerli testnet provided by VERSE team.
 mintVerse.sol - Contains some added functionalities on top of verse.sol
 Truflation.sol - Fetches inflation rate(int) from chainlink oracles.
 dVest.sol - Uses mintVerse.sol and Truflation.sol and contains the dapp logic.
+![WhatsApp Image 2023-06-10 at 4 09 48 AM](https://github.com/barrytra/chainlink_spring_2023/assets/109822630/5bb752c7-e5fe-4285-8c04-e8fd4b59ce5d)
 
 ## Challenges we ran into
 Understanding Truflation smart contract to fetch inflation rate and Chainlink Automation tool. But the Chainlink team has been very helpful to understand the things and debug the things. 

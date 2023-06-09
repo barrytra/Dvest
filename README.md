@@ -6,7 +6,6 @@ Decentralized investing platform where users can deposit their verse tokens(VTES
 user can deposit tokens and can withdraw them only after the maturity period. User can fill maturity period during the deposit
 2) Dynamic Deposit
 Once user deposits his/her tokens can withdraw them anytime. Additonal feature for dynamic deposit is that user can choose for autmatic withdrawal. Just fill out the token amount and as soon as the token amount reaches tha value, tokens will be automatically credited to the user's metamask wallet. For example: user deposits 50 VTEST and enters withdrawal amount as 60 VTEST. When the amount reaches 60 all of the tokens will be credited to user's wallet. This feature was implemented with the help of chainlink automation tool using time based trigger.
-## Flow of the dapp
 ![WhatsApp Image 2023-06-10 at 4 09 48 AM (1)](https://github.com/barrytra/chainlink_spring_2023/assets/109822630/606e2ff4-18f9-44e0-a1c1-54cc50155e8f)
 
 ## How we built it
@@ -15,9 +14,9 @@ Fronted was built using Reactjs. Smart contracts were written in solidity. Trufl
 ![WhatsApp Image 2023-06-10 at 4 09 48 AM](https://github.com/barrytra/chainlink_spring_2023/assets/109822630/5bb752c7-e5fe-4285-8c04-e8fd4b59ce5d)
 
 verse.sol - VERSE token contract on goerli testnet provided by VERSE team.<br>
-mintVerse.sol - Contains some added functionalities on top of verse.sol <br>
-Truflation.sol - Fetches inflation rate(int) from chainlink oracles. <br>
-dVest.sol - Uses mintVerse.sol and Truflation.sol and contains the dapp logic.
+mintVerse.sol - Contains some added functionalities on top of verse.sol (0xA3A8F2B4DcCB6c9a9Ff60A205aD8A142B31a5c88)<br>
+Truflation.sol - Fetches inflation rate(int) from chainlink oracles. (0x25Cb70c92A1FA078E4A9b918c6Ea51376889a15a)<br>
+dVest.sol - Uses mintVerse.sol and Truflation.sol and contains the dapp logic(0x037d942fC7074Fb3d46CDDCF13BA035d0246b7BD).
 
 
 ## Challenges we ran into

@@ -1,3 +1,6 @@
+# Chainlink spring 2023 hackathon Winner
+*Bagged Two sponsor prizes from truflation and Verse*
+
 ## Try it out
 https://chainlink-spring-2023-theta.vercel.app/
 ### note: View the upkeep that was used in demo here!!
